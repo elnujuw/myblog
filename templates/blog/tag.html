@@ -1,0 +1,40 @@
+{% extends "blog/header.html" %}
+{% block content %}
+
+      <section class="archive">
+        <h1 class="article-title">Tag: {{ tag.title }}</h1>
+        <ul class="post-archive">
+          {% if posts %}
+            {% for post in posts.object_list %}
+              <li class="post-item">
+                <a class="post-title" href="{% url 'blog:post_detail' post.id %}">
+                  {{ post.title }}
+                </a>
+                <time class="post-date">
+                  {{ post.get_post_list_publish_date }}
+                </time>
+              </li>
+            {% endfor %}
+          {% endif %}
+        </ul>
+      </section>
+
+      <nav class="page-nav">
+        {% if posts.has_previous %}
+          <a class="extend prev" rel="next" href="?page={{ posts.previous_page_number }}">&lt; 上一页</a>
+        {% endif %}
+        {% for index in page_range %}
+          {% if posts.number == index %}
+            <a class="page-number current">{{ index }}</a>
+          {% else %}
+            <a class="page-number" href="?page={{ index }}">{{ index }}</a>
+          {% endif %}
+        {% endfor %}
+
+        <!--<span class="space">…</span>-->
+        {% if posts.has_next %}
+        <a class="extend next" rel="next" href="?page={{ posts.next_page_number }}">下一页 &gt;</a>
+        {% endif %}
+      </nav>
+
+{% endblock %}

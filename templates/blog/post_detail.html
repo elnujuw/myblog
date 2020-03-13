@@ -1,0 +1,62 @@
+{% extends "blog/header.html" %}
+{% load static %}
+{% block content %}
+    <article class="post">
+      <div class="post-title">
+        <h1 class="article-title">{{ post.title }}</h1>
+      </div>
+       <div class="post-meta">
+        <span class="post-time">Posted on {{ post.get_publish_date }}</span>
+      </div>
+      <div class="post-content">
+        {{ post.get_content }}
+      </div>
+      <!--post comment-->
+      <div class="post-comment">
+        <h5 class="content">评论</h5>
+        {% if comment_list %}
+        <ul class="comment-list">
+          {% for comment in comment_list %}
+          <li class="comment-item">
+            {% if comment.email %}
+            <span class="comment-time">Posted on {{ comment.get_publish_date }} by <a href="mailto:{{ comment.email }}">{{ comment.name }}</a></span>
+            {% else %}
+            <span class="comment-time">Posted on {{ comment.get_publish_date }} by <a href="#">{{ comment.name }}</a></span>
+            {% endif %}
+            <p class="comment-content">
+              {{ comment.content }}
+            </p>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p class="no-comment">
+          不想发表一点想法咩~ 
+        </p>
+        {% endif %}
+        <h5 class="">发表评论</h5>
+          <div class="">
+            <form action="{% url 'blog:add_comment' post.id %}" method="post">
+              {% csrf_token %}
+              <p><input class="comment-input" type="text" name="name" placeholder="昵称"></p>
+              <p><input class="comment-input" type="email" name="email" placeholder="邮箱"></p>
+              <p><textarea class="comment-textarea" rows="5" name="content" placeholder="评论内容"></textarea></p>
+              <button type="submit" class="submit">Submit</button>
+            </form>
+          </div>
+      </div>
+      <!--post footer-->
+      <div class="post-footer">
+        <ul class="post-tag-list">
+          {% if tags %}
+            {% for tag in tags %}
+              <li class="post-tag-list-item">
+                <a class="post-tag-list-link" href="/tags/{{ tag.id }}">{{ tag.title }}</a>
+              </li>
+            {% endfor %}
+          {% endif %}
+        </ul>
+        <a href="#top" class="top">返回顶部</a>
+      </div>
+    </article>
+{% endblock %}

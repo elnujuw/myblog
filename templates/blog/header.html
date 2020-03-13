@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <title>{{ page_title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="keywords" content="{{ keywords }}">
+    <meta name="description" content="{{ description }}">
+    {% load static %}
+    <link href="{% static "blog/css/blog.css" %}" rel="stylesheet">
+    <link href="{% static "blog/css/highlights.css" %}" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="blog-title">
+          <a href="/" class="logo">{{ blog_title }}</a>
+          <div class="subtitle">
+          </div>
+        </div>
+        <nav class="navbar">
+          <ul class="menu">
+            <li class="menu-item">
+              <a href="/" class="menu-item-link">主页</a>
+            </li>
+            <li class="menu-item">
+              <a href="/tags" class="menu-item-link">标签</a>
+            </li>
+            <li class="menu-item">
+              <a href="/about" class="menu-item-link">关于</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+
+      {% block content %}
+      {% endblock %}
+      
+      <footer>
+        {{ footer }}
+        <a href="https://github.com/elnujuw" style="width: 50px; color: #999; display: inline-block; float: right;" target="_blank" rel="noopener noreferrer">
+          GitHub
+        </a>
+        <br>
+        <a rel="license noopener noreferrer" class="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh" target="_blank">署名-非商业性使用 4.0 国际 (CC BY-NC 4.0)</a>
+      </footer>
+    </div>
+  </body>
+</html>

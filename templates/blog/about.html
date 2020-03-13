@@ -1,0 +1,14 @@
+{% extends "blog/header.html" %}
+{% block content %}
+{% if page %}
+    <article class="post">
+      <div class="post-title">
+        <h1 class="article-title">{{ page.title }}</h1>
+      </div>
+      <div class="post-content">
+        {{ page.get_content }}
+      </div>
+    </article>
+{% endif %}
+</section>
+{% endblock %}
